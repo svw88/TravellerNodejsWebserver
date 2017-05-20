@@ -1,6 +1,6 @@
 var mysql=require('mysql');
 var fs=require('fs');
-var connection=mysql.createConnection({
+var connection=mysql.createPool({
 
 username: 'root',
  password: '',
