@@ -1,11 +1,17 @@
-var mysql = require('mysql');
-var config = {
-	user : process.env.MYSQL_USER,
-	database : process.env.MYSQL_DATABASE
-};
+var mysql=require('mysql');
+var fs=require('fs');
+var connection=mysql.createPool({
 
-if (process.env.INSTANCE_CONNECTION_NAME) {
-	config.socketPath = '/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}';
-}
-var connection = mysql.createPool(config);
-module.exports = connection;
+username: 'root',
+ password: '',
+ database: 'demo',
+ host: 'localhost',
+ dialect: 'mysql',
+ dialectOptions: {
+ socketPath: '/cloudsql/{projectName}:{zone}:{instance-name}'
+ },
+
+
+
+});
+module.exports=connection;
