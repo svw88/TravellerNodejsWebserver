@@ -1,14 +1,13 @@
-var mysql=require('mysql');
-var fs=require('fs');
-var connection=mysql.createPool({
+var mysql = require('mysql');
+var fs = require('fs');
 
- user: 'root',
- password: '',
- database: 'demo',
- socketPath: '/cloudsql/traveller-168120:us-central1:travellerdb'
+var config = {
+	user : 'root',
+	password : '',
+	database : 'demo'
+};
 
+config.socketPath = '/cloudsql/$traveller-168120:us-central1:travellerdb';
 
-
-
-});
-module.exports=connection;
+var connection = mysql.createPool(config);
+module.exports = connection; 
