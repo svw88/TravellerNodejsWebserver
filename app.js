@@ -10,6 +10,8 @@ var users = require('./routes/users');
 var Tasks=require('./routes/Tasks');
 var Students=require('./routes/Students');
 var app = express();
+app.enable('trust proxy');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
