@@ -18,7 +18,7 @@ var Task = {
 
 	},
 	getMyEvents : function(userId, date, callback) {
-		return db.query("select events.Id,events.Name,events.Description,events.Type,events.Country,events.State,events.City,events.Addr,events.Site,events.Image,events.Date,events.Price,events.Currency,events.Alias from events join users  WHERE users.Id = ? AND events.Date >=?", [userId, date], callback);
+		return db.query("select events.Id,events.Name,events.Description,events.Type,events.Country,events.State,events.City,events.Addr,events.Site,events.Image,events.Date,events.Price,events.Currency,events.Alias from events join users on users.alias = events.alias  WHERE users.Id = ? AND events.Date >=?", [userId, date], callback);
 
 	},
 	createEvent : function(Task, callback) {
