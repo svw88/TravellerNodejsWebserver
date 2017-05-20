@@ -14,6 +14,12 @@
 # [START runtime]
 runtime: nodejs
 env: flex
+env_variables:
+  MYSQL_USER: root
+  MYSQL_PASSWORD:
+  MYSQL_DATABASE: demo
+  # e.g. my-awesome-project:us-central1:my-cloud-sql-instance
+  INSTANCE_CONNECTION_NAME: traveller-168120:us-central1:travellerdb
 beta_settings:
  cloud_sql_instances: traveller-168120:us-central1:travellerdb
 # [END runtime]

@@ -1,10 +1,12 @@
 var mysql = require('mysql');
-var connection = mysql.createPool({
+var config = {
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
+};
 
-	user : 'root',
-	password : '',
-	database : 'demo',
-	socketPath : '/cloudsql/traveller-168120:us-central1:travellerdb'
-
-});
+if (process.env.INSTANCE_CONNECTION_NAME) {
+  config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
+}
+var connection = mysql.createPool(config);
 module.exports = connection;
