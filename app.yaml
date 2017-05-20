@@ -13,7 +13,7 @@
 #
 # [START runtime]
 runtime: nodejs
-env: production
+env: flex
 beta_settings:
  cloud_sql_instances: traveller-168120:us-central1:travellerdb
 # [END runtime]
