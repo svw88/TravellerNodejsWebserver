@@ -14,7 +14,7 @@ var Task = {
 	},
 	getSearchEvents : function(date, country, state, city, id, types, find, callback) {
 		find = "%"+find+"%";
-		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type in (?) AND (Name like ? OR Description like ? OR Alias = ?)", [date, country, state, city, id, types, find, find, find], callback);
+		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type in (?) AND (Name like ? OR Description like ? OR Alias like ?)", [date, country, state, city, id, types, find, find, find], callback);
 
 	},
 	getMyEvents : function(userId, date, callback) {
