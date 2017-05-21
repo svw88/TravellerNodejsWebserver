@@ -12,9 +12,13 @@ var Task = {
 		return db.query("Select * from events Where Date >= ? AND Alias = ?  AND Id > ?", [date, alias, id], callback);
 
 	},
-	getSearchEvents : function(date, country, state, city, id, types, find, callback) {
+	getSearchEvents : function(date, country, state, city, id, find, callback) {
 		find = "%"+find+"%";
-		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND (Name like ? OR Description like ? OR Alias like ?)", [date, country, state, city, id, types, find, find, find], callback);
+		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND (Name like ? OR Description like ? OR Alias like ?)", [date, country, state, city, id, find, find, find], callback);
+
+	},
+	getFilterEvents : function(date, country, state, city, id, type, callback) {
+		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type = ?", [date, country, state, city, id, type], callback);
 
 	},
 	getMyEvents : function(userId, date, callback) {
