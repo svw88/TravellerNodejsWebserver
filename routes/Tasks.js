@@ -28,7 +28,7 @@ router.get('/events/:date/:alias/:id', function(req, res, next) {
 
 });
 
-router.get('/events/:date/:country/:state/:city/:id/?:find', function(req, res, next) {
+router.get('/events/:date/:country/:state/:city/:id/search/:find', function(req, res, next) {
 
 	Task.getSearchEvents(req.params.date, req.params.country, req.params.state, req.params.city, req.params.id, req.params.find, function(err, rows) {
 
