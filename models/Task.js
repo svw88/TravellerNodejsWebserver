@@ -13,12 +13,17 @@ var Task = {
 
 	},
 	getSearchEvents : function(date, country, state, city, id, find, callback) {
-		find = "%"+find+"%";
+		find = "%" + find + "%";
 		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND (Name like ? OR Description like ? OR Alias like ?)", [date, country, state, city, id, find, find, find], callback);
 
 	},
 	getFilterEvents : function(date, country, state, city, id, type, callback) {
 		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type = ?", [date, country, state, city, id, type], callback);
+
+	},
+	getSearchFilterEvents : function(date, country, state, city, id, type, find, callback) {
+		find = "%" + find + "%";
+		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type = ? AND (Name like ? OR Description like ? OR Alias like ?)", [date, country, state, city, id, type, find, find, find], callback);
 
 	},
 	getMyEvents : function(userId, date, callback) {

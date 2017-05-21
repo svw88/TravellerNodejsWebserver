@@ -41,6 +41,19 @@ router.get('/events/:date/:country/:state/:city/:id/search/:find', function(req,
 
 });
 
+router.get('/events/:date/:country/:state/:city/:id/search/:type/:find', function(req, res, next) {
+
+	Task.getSearchFilterEvents(req.params.date, req.params.country, req.params.state, req.params.city, req.params.id, req.params.type, req.params.find, function(err, rows) {
+
+		if (err) {
+			res.json(err);
+		} else {
+			res.json(rows);
+		}
+	});
+
+});
+
 router.get('/events/:date/:country/:state/:city/:id/:type', function(req, res, next) {
 
 	Task.getFilterEvents(req.params.date, req.params.country, req.params.state, req.params.city, req.params.id, req.params.type, function(err, rows) {
