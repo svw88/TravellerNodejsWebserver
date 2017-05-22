@@ -7,6 +7,11 @@ var Task = {
 		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ?", [date, country, state, city, id], callback);
 
 	},
+	getEvent : function(id, callback) {
+
+		return db.query("Select * from events where Id = ?", [id], callback);
+
+	},
 	getUserEvents : function(date, alias, id, callback) {
 
 		return db.query("Select * from events Where Date >= ? AND Alias = ?  AND Id > ?", [date, alias, id], callback);

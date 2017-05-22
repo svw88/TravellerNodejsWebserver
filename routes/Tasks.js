@@ -15,6 +15,19 @@ router.get('/events/:date/:country/:state/:city/:id', function(req, res, next) {
 
 });
 
+router.get('/events/:id', function(req, res, next) {
+
+	Task.getEvent(req.params.id, function(err, rows) {
+
+		if (err) {
+			res.json(err);
+		} else {
+			res.json(rows);
+		}
+	});
+
+});
+
 router.get('/events/:date/:alias/:id', function(req, res, next) {
 
 	Task.getUserEvents(req.params.date, req.params.alias, req.params.id, function(err, rows) {
