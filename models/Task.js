@@ -4,35 +4,35 @@ var Task = {
 
 	getEvents : function(date, country, state, city, id, callback) {
 
-		return db.query("Select top 10 * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ?", [date, country, state, city, id], callback);
+		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? LIMIT 10", [date, country, state, city, id], callback);
 
 	},
 	getEvent : function(id, callback) {
 
-		return db.query("Select top 1 * from events where Id = ?", [id], callback);
+		return db.query("Select * from events where Id = ? LIMIT 1", [id], callback);
 
 	},
 	getUserEvents : function(date, alias, id, callback) {
 
-		return db.query("Select top 10 * from events Where Date >= ? AND Alias = ?  AND Id > ?", [date, alias, id], callback);
+		return db.query("Select * from events Where Date >= ? AND Alias = ?  AND Id > ? LIMIT 10", [date, alias, id], callback);
 
 	},
 	getSearchEvents : function(date, country, state, city, id, find, callback) {
 		find = "%" + find + "%";
-		return db.query("Select top 10 * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND (Name like ? OR Description like ? OR Alias like ?)", [date, country, state, city, id, find, find, find], callback);
+		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND (Name like ? OR Description like ? OR Alias like ?) LIMIT 10", [date, country, state, city, id, find, find, find], callback);
 
 	},
 	getFilterEvents : function(date, country, state, city, id, type, callback) {
-		return db.query("Select top 10 * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type = ?", [date, country, state, city, id, type], callback);
+		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type = ? LIMIT 10", [date, country, state, city, id, type], callback);
 
 	},
 	getSearchFilterEvents : function(date, country, state, city, id, type, find, callback) {
 		find = "%" + find + "%";
-		return db.query("Select top 10 * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type = ? AND (Name like ? OR Description like ? OR Alias like ?)", [date, country, state, city, id, type, find, find, find], callback);
+		return db.query("Select * from events where Date >= ? AND Country = ? AND State = ? AND City = ? AND Id > ? AND Type = ? AND (Name like ? OR Description like ? OR Alias like ?) LIMIT 10", [date, country, state, city, id, type, find, find, find], callback);
 
 	},
 	getMyEvents : function(userId, date, callback) {
-		return db.query("select events.Id,events.Name,events.Description,events.Type,events.Country,events.State,events.City,events.Addr,events.Site,events.Image,events.Date,events.Price,events.Currency,events.Alias from events join users on users.alias = events.alias  WHERE users.Id = ? AND events.Date >=?", [userId, date], callback);
+		return db.query("select events.Id,events.Name,events.Description,events.Type,events.Country,events.State,events.City,events.Addr,events.Site,events.Image,events.Date,events.Price,events.Currency,events.Alias from events join users on users.alias = events.alias  WHERE users.Id = ? AND events.Date >=? LIMIT 10", [userId, date], callback);
 
 	},
 	createEvent : function(Task, callback) {
