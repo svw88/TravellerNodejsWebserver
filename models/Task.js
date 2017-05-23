@@ -55,7 +55,7 @@ var Task = {
 	},
 	checkUser : function(email, alias, callback) {
 
-		return db.query("Select name,alias from users Where Email = ? OR Alias = ?", [email, alias], callback);
+		return db.query("Select email,alias from users Where Email = ? OR Alias = ?", [email, alias], callback);
 
 	},
 	getCountries : function(callback) {
