@@ -147,6 +147,19 @@ router.get('/login/:email/:password', function(req, res, next) {
 
 });
 
+router.get('/check/:email/:alias', function(req, res, next) {
+
+	Task.checkUser(req.params.email, req.params.alias, function(err, rows) {
+
+		if (err) {
+			res.json(err);
+		} else {
+			res.json(rows);
+		}
+	});
+
+});
+
 router.get('/countries', function(req, res, next) {
 
 	Task.getCountries(function(err, rows) {

@@ -53,6 +53,11 @@ var Task = {
 		return db.query("Select id,alias from users Where Email = ? AND Password = ?", [email, password], callback);
 
 	},
+	checkUser : function(email, alias, callback) {
+
+		return db.query("Select id,alias from users Where Email = ? OR Alias = ?", [email, alias], callback);
+
+	},
 	getCountries : function(callback) {
 
 		return db.query("Select id,name from countries", callback);
