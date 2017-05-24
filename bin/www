@@ -37,7 +37,7 @@ var httpsserver = https.createServer(options, app);
  */
 
 server.listen(port);
-server.httpsserver(port);
+httpsserver.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
