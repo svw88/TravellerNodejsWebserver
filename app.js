@@ -8,7 +8,7 @@ var cors=require('cors');
 var routes = require('./routes/index');
 var Tasks=require('./routes/Tasks');
 var app = express();
-app.enable('trust proxy');
+app.enable('trust proxy', 1);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
