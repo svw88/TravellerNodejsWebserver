@@ -9,8 +9,8 @@ var debug = require('debug')('rkdemo:server');
 var https = require('https');
 var fs = require('fs');
 
-var sslkey = fs.readFileSync('key.pem');
-var sslcert = fs.readFileSync('cert.pem')
+var sslkey = fs.readFileSync('/key.pem');
+var sslcert = fs.readFileSync('/cert.pem')
 
 var options = {
     key: sslkey,
