@@ -6,11 +6,12 @@
 
 var app = require('../app');
 var debug = require('debug')('rkdemo:server');
+var http = require('http');
 var https = require('https');
 var fs = require('fs');
 
-var sslkey = fs.readFileSync('./key.pem');
-var sslcert = fs.readFileSync('./cert.pem')
+var sslkey = fs.readFileSync('./key.key','utf8');
+var sslcert = fs.readFileSync('./cert.crt','utf8')
 
 var options = {
     key: sslkey,
@@ -29,6 +30,7 @@ app.set('port', port);
  */
 
 var server = https.createServer(options, app);
+var httpsserver = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
