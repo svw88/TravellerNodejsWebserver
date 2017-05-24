@@ -7,15 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('rkdemo:server');
 var http = require('http');
-var fs = require('fs');
-
-var sslkey = fs.readFileSync('./key.key','utf8');
-var sslcert = fs.readFileSync('./cert.crt','utf8')
-
-var options = {
-    key: sslkey,
-    cert: sslcert
-};
 
 /**
  * Get port from environment and store in Express.
@@ -29,7 +20,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
 
 /**
  * Listen on provided port, on all network interfaces.
