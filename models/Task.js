@@ -45,7 +45,7 @@ var Task = {
 		if (checkCountry.rows != undefined) {
 			var checkState = db.query("select * from state where Name = ?", [Task.stateName]);
 			if (checkState.rows != undefined) {
-				var checkCity = b.query("select * from cities where Name = ?", [Task.cityName]);
+				var checkCity = db.query("select * from cities where Name = ?", [Task.cityName]);
 				if (checkCity.rows != undefined) {
 
 				} else {
@@ -55,9 +55,15 @@ var Task = {
 			} else {
 				var country = db.query("select * from states where Name = ?", [Task.countryName]);
 				db.query("insert into states (Name, country_id) values (?,?)", [Task.stateName, country.rows[0].country_id]);
+				var state = db.query("select * from states where Name = ?", [Task.stateName]);
+				db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, state.rows[0].state_id]);
 			};
 		} else {
 			db.query("insert into countries (Name) values (?)", [Task.countryName]);
+			var country = db.query("select * from states where Name = ?", [Task.countryName]);
+			db.query("insert into states (Name, country_id) values (?,?)", [Task.stateName, country.rows[0].country_id]);
+			var state = db.query("select * from states where Name = ?", [Task.stateName]);
+			db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, state.rows[0].state_id]);
 		};
 	},
 	createCity : function(name, id, callback) {
