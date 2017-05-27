@@ -43,22 +43,22 @@ var Task = {
 	checkLocation : function(Task) {
 		db.query("select * from countries where Name = ?", [Task.countryName], function(err, rows) {
 			if (rows.length > 0) {
-				db.query("select * from state where Name = ?", [Task.stateName], function(err, rows) {
+				db.query("select * from states where Name = ?", [Task.stateName], function(err, rows) {
 					if (rows.length > 0) {
 						db.query("select * from cities where Name = ?", [Task.cityName], function(err, rows) {
 							if (rows.length > 0) {
 
 							} else {
 								db.query("select * from states where Name = ?", [Task.stateName], function(err, rows) {
-									db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, rows[0].state_id]);
+									db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, rows[0].Id]);
 								});
 							};
 						});
 					} else {
-						db.query("select * from states where Name = ?", [Task.countryName], function(err, rows) {
-							db.query("insert into states (Name, country_id) values (?,?)", [Task.stateName, rows[0].country_id]);
-							db.query("select * from states where Name = ?", [Task.stateName], function(err, rows) {
-								db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, rows[0].state_id]);
+						db.query("select * from countries where Name = ?", [Task.countryName], function(err, rows) {
+							db.query("insert into states (Name, country_id) values (?,?)", [Task.stateName, rows[0].Id]);
+							db.query("select * from states where Name = ?", [Task.stateName], function(err, rows) {								
+								db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, rows[0].Id]);
 							});
 						});
 					};
@@ -66,9 +66,9 @@ var Task = {
 			} else {
 				db.query("insert into countries (Name) values (?)", [Task.countryName]);
 				db.query("select * from states where Name = ?", [Task.countryName], function(err, rows) {
-					db.query("insert into states (Name, country_id) values (?,?)", [Task.stateName, rows[0].country_id]);
+					db.query("insert into states (Name, country_id) values (?,?)", [Task.stateName, rows[0].Id]);
 					db.query("select * from states where Name = ?", [Task.stateName], function(err, rows) {
-						db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, rows[0].state_id]);
+						db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, rows[0].Id]);
 					});
 				});
 
