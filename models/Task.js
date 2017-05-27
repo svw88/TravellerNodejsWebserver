@@ -76,11 +76,6 @@ var Task = {
 		});
 
 	},
-	createCity : function(name, id, callback) {
-		console.log("inside service");
-		console.log(Task);
-		return db.query("insert into cities (Name,state_id) values (?)", [name, id], callback);
-	},
 	removeEvent : function(id, callback) {
 		return db.query("delete from events where Id=?", [id], callback);
 	},
