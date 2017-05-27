@@ -107,6 +107,11 @@ router.post('/create', function(req, res, next) {
 	});
 });
 
+router.post('/location', function(req, res, next) {
+
+	Task.checkLocation(req.body);
+});
+
 router.delete('/remove/:id', function(req, res, next) {
 
 	Task.removeEvent(req.params.id, function(err, count) {

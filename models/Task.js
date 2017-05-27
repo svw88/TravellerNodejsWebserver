@@ -40,6 +40,31 @@ var Task = {
 		console.log(Task);
 		return db.query("insert into events(Name,Description,Type,Country,State,City,Addr,Site,Image,Date,Price,Currency,Alias) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", [Task.Name, Task.Description, Task.Type, Task.Country, Task.State, Task.City, Task.Addr, Task.Site, Task.Image, Task.Date, Task.Price, Task.Currency, Task.Alias], callback);
 	},
+	checkLocation : function(Task) {
+		var checkCountry = db.query("select * from countries where Name = ?", [Task.countryName]);
+		if (checkCountry.rows.length > 0) {
+			var checkState = db.query("select * from state where Name = ?", [Task.stateName]);
+			if (checkState.rows.length > 0) {
+				var checkCity = b.query("select * from cities where Name = ?", [Task.cityName]);
+				if (checkCity.rows.length > 0) {
+
+				} else {
+					var state = db.query("select * from states where Name = ?", [Task.stateName]);
+					db.query("insert into cities (Name,state_id) values (?,?)", [Task.cityName, state.rows[0].state_id]);
+				};
+			} else {
+				var country = db.query("select * from states where Name = ?", [Task.countryName]);
+				db.query("insert into states (Name, country_id) values (?,?)", [Task.stateName, country.rows[0].country_id]);
+			};
+		} else {
+			db.query("insert into countries (Name) values (?)", [Task.countryName]);
+		};
+	},
+	createCity : function(name, id, callback) {
+		console.log("inside service");
+		console.log(Task);
+		return db.query("insert into cities (Name,state_id) values (?)", [name, id], callback);
+	},
 	removeEvent : function(id, callback) {
 		return db.query("delete from events where Id=?", [id], callback);
 	},
