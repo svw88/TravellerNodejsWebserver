@@ -42,11 +42,11 @@ var Task = {
 	},
 	checkLocation : function(Task) {
 		var checkCountry = db.query("select * from countries where Name = ?", [Task.countryName]);
-		if (checkCountry.rows.length > 0) {
+		if (checkCountry.rows != undefined) {
 			var checkState = db.query("select * from state where Name = ?", [Task.stateName]);
-			if (checkState.rows.length > 0) {
+			if (checkState.rows != undefined) {
 				var checkCity = b.query("select * from cities where Name = ?", [Task.cityName]);
-				if (checkCity.rows.length > 0) {
+				if (checkCity.rows != undefined) {
 
 				} else {
 					var state = db.query("select * from states where Name = ?", [Task.stateName]);
